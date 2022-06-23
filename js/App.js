@@ -1,7 +1,7 @@
 import {Note} from "./Note.js";
 import {Helper} from "./Helper.js";
 
-
+console.log("ssasd");
 //? two btns DOM's opens dialog
 const add_new_btn =document.getElementById("add_new_btn");
 const add_btn = document.getElementById("add_btn");
@@ -79,14 +79,19 @@ save_btn.addEventListener("click",()=>{
     let note_pinned_value = model.querySelector("#pin_btn").dataset.pin_value; 
     let note_time = Helper.getDateTime();  
 
+    // console.log("save clicked");
+
     if(Note.ValidateNote(note_title,note_content))
     {
+        
         if(note_id=="")
         {
+           
             model.querySelector("#insert_note_id").value = Note.SaveNote(note_title,note_content,note_pinned_value,note_time);
         }
         else
         {
+            console.log("save btn clicked");
             Note.UpdateNote(note_id,note_title,note_content,note_pinned_value,note_time);
         }
        

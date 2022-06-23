@@ -17,12 +17,12 @@ export class Note{
 
     static SaveNote(title,content,pinned,time)
     {   
+        
         var NOTE_BOX = [];
         
         let id = "";
-        if(window.localStorage.getItem("NOTES"))
-        {
-            if(window.localStorage.getItem("NOTES")=="[]")
+
+            if(!window.localStorage.getItem("NOTES"))
             {
                 id = 1;
                 const NEW_NOTE = new Note(id,title,content,pinned,time);
@@ -40,7 +40,7 @@ export class Note{
                 
                 window.localStorage.setItem("NOTES",JSON.stringify(NOTE_BOX));
             }
-        }
+
         return id;
     }
 
@@ -109,6 +109,12 @@ export class Note{
             }
             window.localStorage.setItem("NOTES",JSON.stringify(NOTE_BOX));
             
+            
+        }
+
+        if(window.localStorage.getItem("NOTES")=="[]")
+        {
+            window.localStorage.removeItem("NOTES");
         }
     }
 
@@ -123,8 +129,14 @@ export class Note{
     static DisplayAllNotes()
     {   
         var NOTE_BOX = [];
-        var section_note_data = "";
-        var section_pinned_data = "";
+        var section_note = document.getElementById("section_note");
+        var section_pinned = document.getElementById("section_pinned");
+        section_note.innerHTML = "";
+        section_pinned.innerHTML = "";
+
+        var section_note_data= "";
+        var section_pinned_data = ""
+
         if(window.localStorage.getItem("NOTES"))
         {
             NOTE_BOX = JSON.parse(window.localStorage.getItem("NOTES")) || [];
@@ -169,8 +181,8 @@ export class Note{
                 }
             }  
 
-            document.getElementById("section_note").innerHTML=section_note_data;
-            document.getElementById("section_pinned").innerHTML=section_pinned_data;
+            section_note.innerHTML=section_note_data;
+            section_pinned.innerHTML=section_pinned_data;
 
             Helper.LineCount();
             Helper.NoteBox_ClickEvent();
