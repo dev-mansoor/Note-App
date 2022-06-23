@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>Afghan-Note</title>
+</head>
+<body>
+    <!-- header -->
+    <header class="header-container">
+        <div class="header-selected_to_delete">
+            <div class="header-selected_to_delete-logo">
+                <i class="fa-solid fa-xmark header-icon" id="cancel_select_all_btn"></i><span><span id="selected_number">25</span>selected</span>
+            </div>
+            <div class="header-selected_to_delete-action">
+                <i class="fa-regular fa-square header-icon" id="select_deselect_all_btn"></i>
+                <!-- <i class="fa-solid fa-square-check header-icon"></i> -->
+                <i class="fa-solid fa-trash-can header-icon" id="delete_all_btn"></i>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-main-logo">
+                <span class="header-name"><i class="fa-solid fa-file-medical header-icon"></i> Notes</span> 
+            </div>
+            <div class="header-main-search">
+                <input type="text" placeholder="search" class="search-input" id="search"><i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+        </div>
+        
+    </header>
+    <!-- main -->
+    <main class="main">
+        <section class="section-top">
+            <div class="top-fixed" id="add_new_btn">
+                <span class="fixed-icon">
+                    <!-- <i class="fa-solid fa-file-medical header-icon"></i> -->
+                    <i class="fa-solid fa-square-pen"></i>
+                </span>
+                <span class="fixed-name">Write Memo...</span>
+            </div>
+            <div class="top-date">
+                    <span class="date_time"></span>
+            </div>
+            
+        </section>
+
+        <hr class="line-dark">
+
+        <section class="section-pinned" id="section_pinned">
+            <!-- <div class="note-box">
+                <div class="note-header">
+                    <h3>school my addmitions asasdas</h3><i class="fa-solid fa-thumbtack note-header-icon"></i>
+                </div>
+                <div class="note-body">
+                    <p id="data"> asd asd  asdasd asd as  a ask akh lkhas klh lhl l  as d asd lakjlj lj laj lj alj la jl jla jl jlajsk ljsdasa d sa   sas   asd  as da asdd  as d asd as asdasdas   as adas as das  asd a sdad as asd asd  as das dasasdasd</p>
+                </div>
+                <div class="note-footer">
+                    <p>May 23,10:23 PM</p>
+                </div>
+            </div> -->
+        
+            
+        </section>
+
+        <hr class="line-dark">
+
+        <section class="section-note" id="section_note">
+             <!-- <div class="note-box">
+                <div class="note-header">
+                    <h3>school my addmitions asasdas</h3>
+                </div>
+                <div class="note-body">
+                    <p id="data"></p>
+                </div>
+                <div class="note-footer">
+                    <p>May 23,10:23 PM</p>
+                </div>
+            </div> -->
+        </section>
+
+        <div class="add-container">
+            <span class="add-btn" id="add_btn">
+                <i class="fa-solid fa-plus"></i>
+            </span>
+        </div>
+    </main>
+
+
+    <dialog class="dialog-insert-container" id="dialog_insert">
+        <div class="dialog-insert-header">
+            <div>
+                <i class="fa-solid fa-arrow-left" id="back_btn"></i>
+                <span id="note_heading">New Note</span>
+            </div>
+            <div>
+                <i class="fa-solid fa-thumbtack" data-pin_value="pinned" id="pin_btn"></i>
+                <i class="fa-solid fa-trash-can" id="delete_btn"></i>
+                <i class="fa-solid fa-check" id="save_btn"></i>
+            </div>
+        </div>
+        <div class="dialog-insert-body">
+            <input type="text" placeholder="ID" id="insert_note_id" style="display:none;">
+            <input type="text" placeholder="Title" id="insert_note_title">
+            <hr class="line-dark">
+            <textarea placeholder="Content" id="insert_note_content"></textarea>
+        </div>
+        <div class="dialog-insert-footer" >
+            <span class="date_time" id="date_time"></span>
+        </div>
+        
+    </dialog>
+
+    <dialog class="dialog-delete-container" id="dialog_delete">
+        <div class="dialog-delete-header">
+            <h4 id="delete_selected">Delete 1 note?</h4>
+        </div>
+        <div class="dialog-delete-body">
+            <p id="delete_msg">Selected note will be deleted</p>
+        </div>
+        <div class="dialog-delete-footer">
+            <button id="delete">Delete</button>
+            <button id="cancel">Cancel</button>
+        </div>
+    </dialog>
+
+    
+    <script src="js/Note.js" type="module"></script>
+    <script src="js/Helper.js" type="module"></script>
+    <script src="js/App.js" type="module"></script>
+</body>
+</html>
