@@ -136,54 +136,109 @@ export class Helper{
     {
         var longPress = false;
         var timeout;
+        let Mobile = navigator.userAgentData.mobile;
         // ?notes DOM's
         const note_box = document.querySelectorAll(".note-box");
-        
-        
-        //? long press event
-        note_box.forEach(NoteBox=>NoteBox.addEventListener("mouseup",()=>{
-            clearInterval(timeout);
-        }));
-    
-    
-        note_box.forEach(NoteBox=>NoteBox.addEventListener("mousedown",()=>{
-            
-            timeout=setInterval(() => {
-               longPress=true;
-                   NoteBox.classList.add("selected");
-                   document.querySelector('.header-container').classList.add("show");
-            }, 300);
-    
-    
-                if(document.querySelectorAll(".selected").length>0)
-                {
-                    if(!NoteBox.classList.contains("selected"))
-                    {
+     
+         
+       
+        //? long touch event
+        note_box.forEach(NoteBox=>NoteBox.addEventListener("touchstart",()=>{
+            Mobile = navigator.userAgentData.mobile;
+                 timeout=setInterval(() => {
+                    longPress=true;
                         NoteBox.classList.add("selected");
-                    }
-                    else
-                    {
-                        NoteBox.classList.remove("selected");
-                    }
-                }
-                else
-                {
-                    longPress=false;
-                }
+                        document.querySelector('.header-container').classList.add("show");
+                 }, 300);
+         
+                
+                     if(document.querySelectorAll(".selected").length>0)
+                     {
+                        console.log("A");
+                         if(!NoteBox.classList.contains("selected"))
+                         {
+                            console.log("C");
+                             NoteBox.classList.add("selected");
+                         }
+                         else
+                         {
+                            console.log("here")
+                            NoteBox.classList.remove("selected");
+                         }
+                     }
+                     else
+                     {
+                        console.log("B");
+                         longPress=false;
+                     }
+         
+                 this.countSelected();
+            
+        }));
+
+        
+        note_box.forEach(NoteBox=>NoteBox.addEventListener("touchend",()=>{
+            Mobile = navigator.userAgentData.mobile;
+                    clearInterval(timeout);    
+        }));
+
+        
     
-            this.countSelected();
-        })
-        );
+        
+            //? long press event
+            note_box.forEach(NoteBox=>NoteBox.addEventListener("mouseup",()=>{
+                
+                Mobile = navigator.userAgentData.mobile;
+                if(Mobile==false)
+                {console.log("up")
+                    clearInterval(timeout);   
+                } 
+              
+            }));
+        
+            note_box.forEach(NoteBox=>NoteBox.addEventListener("mousedown",()=>{
+                 Mobile = navigator.userAgentData.mobile;
+                if(Mobile==false)
+                {
+              
+                     timeout=setInterval(() => {
+                        longPress=true;
+                            NoteBox.classList.add("selected");
+                            document.querySelector('.header-container').classList.add("show");
+                     }, 300);
+             
+             
+                         if(document.querySelectorAll(".selected").length>0)
+                         {
+                             if(!NoteBox.classList.contains("selected"))
+                             {
+                                console.log("mouse1")
+                                 NoteBox.classList.add("selected");
+                             }
+                             else
+                             {
+                                console.log("mouse")
+                                 NoteBox.classList.remove("selected");
+                             }
+                         }
+                         else
+                         {
+                             longPress=false;
+                         }
+             
+                     this.countSelected();
+                }
+            }));
+    
     
         // ? click event 
         note_box.forEach(NoteBox=>NoteBox.addEventListener("click",()=>{
-    
-            if(longPress==false && document.querySelectorAll(".selected").length==0)
-            {
-                Note.DisplaySingleNote(NoteBox);
-                Note.DisplayAllNotes();
-            }
-           
+            
+                if(longPress==false && document.querySelectorAll(".selected").length==0)
+                {
+                    Note.DisplaySingleNote(NoteBox);
+                    Note.DisplayAllNotes();
+                }
         })
         );
     }

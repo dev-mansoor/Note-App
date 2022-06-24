@@ -51,6 +51,11 @@
     padding: 0;
 }
 
+html {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+ }
+
 body{
     overflow: hidden;
 }
