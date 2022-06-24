@@ -934,4 +934,12 @@ dialog.dialog-delete-container[open]
     {
         height: calc(100% - 59px);
     }
+
+
+    /*? toast-container  */
+
+    .toast-container
+    {  
+        min-width: 300px;
+    }
 }
