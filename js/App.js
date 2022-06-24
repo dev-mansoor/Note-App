@@ -1,7 +1,8 @@
 import {Note} from "./Note.js";
 import {Helper} from "./Helper.js";
 
-console.log("ssasd");
+
+//*-----------------------------------------------------------------
 //? two btns DOM's opens dialog
 const add_new_btn =document.getElementById("add_new_btn");
 const add_btn = document.getElementById("add_btn");
@@ -24,8 +25,13 @@ const delete_all_btn = document.getElementById("delete_all_btn");
 const cancel_select_all_btn = document.getElementById("cancel_select_all_btn");
 
 //? input_box DOM's
-const search_box = document.getElementById("search"); 
+const search_box = document.getElementById("search");
 
+//?toast_close
+const toast_close = document.getElementById("toast_close");
+
+
+//*----------------------------------------------------------------- 
 //? eventListeners
 add_btn.addEventListener("click",()=>{
    Note.ShowInsertModel(model);
@@ -86,16 +92,17 @@ save_btn.addEventListener("click",()=>{
         
         if(note_id=="")
         {
-           
             model.querySelector("#insert_note_id").value = Note.SaveNote(note_title,note_content,note_pinned_value,note_time);
+            Helper.ShowToast("Success","Note has been saved successfully!");
         }
         else
         {
-            console.log("save btn clicked");
             Note.UpdateNote(note_id,note_title,note_content,note_pinned_value,note_time);
+            Helper.ShowToast("Success","Note has been modified successfully!");
         }
        
         Note.DisplayAllNotes();
+        
     }
 });
 
@@ -115,6 +122,7 @@ delete_btn.addEventListener("click",()=>{
                 modal_delete.close();
                 Note.DeleteNote(note_id);
                 Note.DisplayAllNotes();
+                Helper.ShowToast("Delete","Selected note has been deleted!"); 
             }
         
             modal_delete_cancel_btn.onclick = ()=>{
@@ -155,7 +163,8 @@ delete_all_btn.addEventListener("click",()=>{
         Note.DeleteNoteAll(selected_note_id);
         Note.DisplayAllNotes();
         Helper.countSelected();
-        modal_delete.close();  
+        modal_delete.close();
+        Helper.ShowToast("Delete","Selected notes has been deleted!");  
     }
 
     modal_delete_cancel_btn.onclick = ()=>{
@@ -177,6 +186,9 @@ search_box.addEventListener("input",(e)=>{
 });
 
 
+toast_close.addEventListener("click",()=>{
+    Helper.CloseToast();
+});
 
 
 //?--------------------------- calling ----------------------------------

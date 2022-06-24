@@ -217,6 +217,7 @@ export class Note{
         model.querySelector("#insert_note_title").value = note_title;
         model.querySelector("#insert_note_content").value = note_content;
 
+        model.querySelector("#insert_note_title").blur();
     }
 
     static SearchNote(value)
@@ -272,6 +273,9 @@ export class Note{
     static ShowInsertModel(model_dom)
     {
         model_dom.showModal();
+        
+        model_dom.querySelector("#insert_note_title").blur();
+
         this.EmptyValues();
     }
 }

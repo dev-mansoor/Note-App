@@ -107,7 +107,7 @@
             <hr class="line-dark">
             <textarea placeholder="Content" id="insert_note_content"></textarea>
         </div>
-        <div class="dialog-insert-footer" >
+        <div class="dialog-insert-footer">
             <span class="date_time" id="date_time"></span>
         </div>
         
@@ -125,6 +125,20 @@
             <button id="cancel">Cancel</button>
         </div>
     </dialog>
+
+    <div class="toast-container" id="toast_container">
+        <div class="toast-front">
+            <div class="toast-close"><i class="fa-solid fa-xmark" id="toast_close"></i></div>
+            <div class="toast-logo">
+                <i class="fa-solid fa-circle-check" id="toast_logo"></i>
+            </div>
+            <div class="toast-info">
+                <h4 id="info_header">Success</h4>
+                <p id="info_description">Your changes has been saved</p>
+            </div>
+        </div>
+        <div class="toast-back"></div>
+    </div>
 
     
     <script src="js/Note.js" type="module"></script>

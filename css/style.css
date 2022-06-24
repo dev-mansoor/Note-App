@@ -17,17 +17,30 @@
     --FONT-z-17:17px;
     --FONT-z-18:18px;
 
+    --ICON-z-18:18px;
+
     --FONT-z-add-btn:16px;
     --NOTE-header-fz-16_5:16.5px;
     --NOTE-body-fz:14px;
     --NOTE-footer-fz:13px;
 
-    /* boxes color */
+    /*? boxes color */
     --FIXED-bg-clr:crimson;
     --FIXED-bg-clr-light:crimson;;
     --DARK-clr:rgb(117, 117, 117);
       --BORDER-rds:5px;
 
+
+    /*? z-index */
+    --Z-index-100:100;
+    --Z-index-200:200;
+    --Z-index-300:300;
+    --Z-index-400:400;
+    --Z-index-500:500;
+
+    /*? font family */
+    --FONT-f-Segoe:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --FONT-f-arial: Arial, Helvetica, sans-serif;
 
 }
 
@@ -57,6 +70,13 @@ header,section
     border: none;
     height: 1px;
     background-color:var(--border-dark);
+}
+
+.fa-solid , .fa-regular
+{
+    font-size: var(--ICON-z-18);
+    user-select: none;
+    
 }
 
 ::-webkit-scrollbar {
@@ -105,6 +125,18 @@ header,section
     100%{transform: translateY(0%);}
 }
 
+@keyframes slide-left
+{
+    0%{ transform: translateX(150%);}
+    100%{transform: translateX(0%);}
+}
+
+@keyframes slide-right
+{
+    0%{ transform: translateX(0%);}
+    100%{transform: translateX(150%);}
+}
+
 /* ? header */
 .header-container
 {    
@@ -115,9 +147,9 @@ header,section
     height: 65px;
     /* padding: 15px 10px; */
     background-color:var(--bg-clr);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:var(--FONT-f-Segoe);
     border-bottom: 1px solid var(--border-dark);
-    z-index: 500;
+    z-index: var(--Z-index-400);
 }
 
 .header-container .header-main
@@ -185,8 +217,9 @@ header,section
 .header-main .header-main-search .search-icon
 {
     position: absolute;
-    right: 15px;
+    right: 12px;
     top: 8.5px;
+    font-size: 16px;
 }
 
 
@@ -246,7 +279,7 @@ header,section
     width: 100%;
     height: calc(100vh - 65px);
     background-color:var(--bg-clr);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:var(--FONT-f-Segoe);
     font-size: var(--FONT-z);
     font-weight:400;
     overflow-x:auto;
@@ -548,7 +581,7 @@ dialog
     border-radius:var(  --BORDER-rds);
     box-shadow:0 5px 15px 1px rgba(7, 7, 7, 0.486);
     overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:var(--FONT-f-arial);
 
 }
 dialog[open]::backdrop
@@ -737,8 +770,118 @@ dialog.dialog-delete-container[open]
 }
 
 
+/* ? toast style */
+.toast-container
+{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    transform: translateX(150%);
+    min-width: 320px;
+    background-color: white;
+    box-shadow: -2px 2px 10px 1px rgba(0, 0, 0, 0.199);
+    border-radius: var(--BORDER-rds);
+    
+    font-family: var(--FONT-f-arial);
+    z-index: var(--Z-index-500);
+
+    animation: slide-right 500ms forwards,
+               fade-out 500ms forwards;
+}
 
 
+.toast-container.show
+{
+    animation: slide-left 500ms forwards,
+               fade-in 500ms forwards;
+}
+
+ .toast-container .toast-back
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 70%;
+    height: 74px;
+    border-radius: 10px;
+    background-color:#6a8df2;
+    z-index: -1;
+}
+
+.toast-container .toast-front
+{
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    align-items:center;
+    padding: 16px;
+    border-radius: var(--BORDER-rds);
+    background-color:var(--white-clr);
+}
+
+.toast-front .toast-close
+{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+.toast-front .toast-close #toast_close
+{
+    font-size: var(--FONT-z-14);
+    color:rgb(92, 92, 92);
+
+    cursor: pointer;
+}
+
+.toast-front .toast-logo
+{
+    margin-right: 15px;
+
+}
+.toast-front .toast-logo #toast_logo
+{
+    font-size:22px;
+    color: #6a8df2;
+}
+
+.toast-front .toast-info #info_header
+{
+    font-size: var(--FONT-z-15);
+    color:rgb(92, 92, 92);
+    margin-bottom: 5px;
+}
+
+.toast-front .toast-info #info_description
+{
+    font-size: var(--FONT-z-15);
+    color:rgb(112, 112, 112);
+}
+
+
+/*? styling change in classes */
+/*? info */
+.toast-container.info .toast-back
+{
+    background-color: rgb(31, 166, 255);
+}
+
+.toast-container.info .toast-front .toast-logo #toast_logo
+{
+    color: rgb(31, 166, 255);
+}
+
+/*? delete */
+.toast-container.delete .toast-back
+{
+    background-color: rgb(207, 3, 3);
+}
+
+.toast-container.delete .toast-front .toast-logo #toast_logo
+{
+    color: rgb(207, 3, 3);
+}
 
 @media screen and (max-width:480px){
     dialog.dialog-insert-container

@@ -283,4 +283,51 @@ export class Helper{
         modal.showModal();
     }
 
+    static ShowToast(header,description)
+    {
+
+        const toast_container = document.getElementById("toast_container"),
+              toast_logo = toast_container.querySelector("#toast_logo"),
+              info_header = toast_container.querySelector("#info_header"),
+              info_description =toast_container.querySelector("#info_description");
+        
+        toast_container.classList.add("show");
+
+        if(header =="info" || header =="Info")
+        {
+            toast_container.classList.add("info");
+            toast_logo.className="fa-solid fa-circle-question";
+            info_header.innerText="Info";
+            info_description.innerText=description;
+        }
+        else if(header=="delete" || header=="Delete")
+        {
+            toast_container.classList.remove("info");
+            toast_container.classList.add("delete");
+            toast_logo.className="fa-solid fa-circle-minus";
+            info_header.innerText="Delete";
+            info_description.innerText=description;
+        }
+        else
+        {
+            toast_container.classList.remove("info");
+            toast_container.classList.remove("delete");
+            toast_logo.className="fa-solid fa-circle-check";
+            info_header.innerText=header;
+            info_description.innerText=description;
+        }
+
+        setTimeout(i=>{
+            toast_container.classList.remove("show");
+        },5000);
+        
+     
+    }
+
+    static CloseToast()
+    {
+        const toast_container = document.getElementById("toast_container");
+        toast_container.classList.remove("show");
+    }
+
 }
