@@ -1,6 +1,7 @@
 import {Note} from "./Note.js";
 export class Helper{
 
+    
     static LineCount()
     {
         var section_note_body = document.querySelectorAll(".section-note .note-box .note-body p");
@@ -273,6 +274,17 @@ export class Helper{
         return arr;
     }
     
+
+    static CheckInternet()
+    {
+        window.addEventListener("online",()=>{
+            this.ShowToast("Online","Internet connection!");
+        });
+
+        window.addEventListener("offline",()=>{
+            this.ShowToast("Offline","No internet connection!");
+        })
+    }
     static DeleteMsgBox(modal,selected,msg)
     {
         var delete_selected = modal.querySelector("#delete_selected");
@@ -283,6 +295,11 @@ export class Helper{
         modal.showModal();
     }
 
+    //? toast codes 
+
+    static start;
+    static reset;
+
     static ShowToast(header,description)
     {
 
@@ -290,44 +307,104 @@ export class Helper{
               toast_logo = toast_container.querySelector("#toast_logo"),
               info_header = toast_container.querySelector("#info_header"),
               info_description =toast_container.querySelector("#info_description");
-        
+
+        this.StartTime();
         toast_container.classList.add("show");
 
         if(header =="info" || header =="Info")
         {
-            toast_container.classList.add("info");
+            this.StopTime();
+            this.AddClass(toast_container,"info");
             toast_logo.className="fa-solid fa-circle-question";
             info_header.innerText="Info";
             info_description.innerText=description;
         }
         else if(header=="delete" || header=="Delete")
         {
-            toast_container.classList.remove("info");
-            toast_container.classList.add("delete");
+            this.StopTime();
+            this.AddClass(toast_container,"delete");
             toast_logo.className="fa-solid fa-circle-minus";
             info_header.innerText="Delete";
             info_description.innerText=description;
         }
-        else
+        else if(header=="online" || header=="Online")
         {
-            toast_container.classList.remove("info");
-            toast_container.classList.remove("delete");
-            toast_logo.className="fa-solid fa-circle-check";
-            info_header.innerText=header;
+            this.StopTime();
+            this.AddClass(toast_container,"online");
+
+            toast_logo.className="fa-solid fa-wifi";
+            info_header.innerText="Online";
             info_description.innerText=description;
         }
-
-        setTimeout(i=>{
-            toast_container.classList.remove("show");
-        },5000);
+        else if(header=="offline" || header=="Offline")
+        {
+            this.StopTime();
+            this.AddClass(toast_container,"offline");
+            toast_logo.className="fa-solid fa-wifi";
+            info_header.innerText="Offline";
+            info_description.innerText=description;
+        }
+        else
+        {
+            this.StopTime();
+            this.AddClass(toast_container,"");
+            toast_logo.className="fa-solid fa-circle-check";
+            info_header.innerText="Success";
+            info_description.innerText=description;
+        }
         
-     
+
     }
 
-    static CloseToast()
+    static StartTime()
     {
-        const toast_container = document.getElementById("toast_container");
-        toast_container.classList.remove("show");
+        clearTimeout(this.reset);
+        this.start = setTimeout(()=>{
+            this.CloseToast(null);
+        },5000);
+    }
+    static StopTime()
+    {
+        clearTimeout(this.start);
+        this.reset = setTimeout(()=>{
+            this.CloseToast(null);
+        },5000);
+    }
+
+    static CloseToast(status)
+    {
+        const toast_container = document.getElementById("toast_container")
+        if(status!=null)
+        {
+            clearTimeout(this.start);
+            clearTimeout(this.reset);
+            toast_container.classList.remove("show");
+            
+        }
+        else
+        {
+            toast_container.classList.remove("show");
+        }
+        
+        
+    }
+
+    static AddClass(Toast_Container,AddClass)
+    {
+
+        Toast_Container.classList.forEach(i=>{
+            if(i!="toast-container")
+            { 
+                if(i!="show")
+                {
+                    Toast_Container.classList.remove(i);
+                }
+            }
+        });
+        if(AddClass!="")
+        {
+        Toast_Container.classList.add(AddClass);
+        }
     }
 
 }

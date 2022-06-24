@@ -53,16 +53,19 @@ pin_btn.addEventListener("click",(e)=>{
     let note_content = model.querySelector("#insert_note_content").value;
     let note_pinned = model.querySelector("#pin_btn").dataset;
     let note_time = Helper.getDateTime();
+    let pinned_msg="";
 
     if(e.target.classList.contains("pinned-clr"))
     {
         e.target.classList.remove("pinned-clr");
         note_pinned.pin_value="";
+        pinned_msg = "Selected note unpinned!";
     }
     else
     {
         e.target.classList.add("pinned-clr");
         note_pinned.pin_value="pinned";
+        pinned_msg = "Selected note pinned!";
     }
 
     if(Note.ValidateNote(note_title,note_content))
@@ -71,6 +74,7 @@ pin_btn.addEventListener("click",(e)=>{
         {
             Note.UpdateNote(note_id,note_title,note_content,note_pinned.pin_value,note_time);
             Note.DisplayAllNotes();
+            Helper.ShowToast("Info",pinned_msg); 
             
         }
     }
@@ -93,12 +97,12 @@ save_btn.addEventListener("click",()=>{
         if(note_id=="")
         {
             model.querySelector("#insert_note_id").value = Note.SaveNote(note_title,note_content,note_pinned_value,note_time);
-            Helper.ShowToast("Success","Note has been saved successfully!");
+            Helper.ShowToast("Success","Note has been added!");
         }
         else
         {
             Note.UpdateNote(note_id,note_title,note_content,note_pinned_value,note_time);
-            Helper.ShowToast("Success","Note has been modified successfully!");
+            Helper.ShowToast("Success","Note has been modified!");
         }
        
         Note.DisplayAllNotes();
@@ -187,8 +191,12 @@ search_box.addEventListener("input",(e)=>{
 
 
 toast_close.addEventListener("click",()=>{
-    Helper.CloseToast();
+    Helper.CloseToast("close");
 });
+
+
+
+Helper.CheckInternet();
 
 
 //?--------------------------- calling ----------------------------------
