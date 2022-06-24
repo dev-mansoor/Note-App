@@ -642,7 +642,7 @@ dialog.dialog-insert-container[open]
     border-radius:50px;
     font-size: 18px;
     user-select: none;
-    cursor: pointer;
+  
     
     transition: background-color 0.15s,
                 color 0.15s;
