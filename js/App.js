@@ -105,6 +105,7 @@ save_btn.addEventListener("click",()=>{
             Helper.ShowToast("Success","Note has been modified!");
         }
        
+        model.close();
         Note.DisplayAllNotes();
         
     }

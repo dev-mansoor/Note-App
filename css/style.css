@@ -783,7 +783,7 @@ dialog.dialog-delete-container[open]
     border-radius: var(--BORDER-rds);
     
     font-family: var(--FONT-f-arial);
-    z-index: var(--Z-index-500);
+    z-index: 10000;
 
     animation: slide-right 500ms forwards;
             
