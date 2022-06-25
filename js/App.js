@@ -3,6 +3,10 @@ import {Helper} from "./Helper.js";
 
 
 //*-----------------------------------------------------------------
+
+//? main DOM
+const main_container = document.getElementById("main_container");
+
 //? two btns DOM's opens dialog
 const add_new_btn =document.getElementById("add_new_btn");
 const add_btn = document.getElementById("add_btn");
@@ -197,7 +201,15 @@ toast_close.addEventListener("click",()=>{
 
 
 
-Helper.CheckInternet();
+
+main_container.addEventListener("scroll",(e)=>{
+    Helper.DeviceHeigth();
+});
+
+window.addEventListener("resize",()=>{
+    Helper.DeviceHeigth();
+});
+
 
 
 //?--------------------------- calling ----------------------------------
@@ -205,5 +217,5 @@ setInterval(()=>{
     Helper.getDateTime();
 },6*1000);
 Note.DisplayAllNotes();
- 
+Helper.CheckInternet(); 
 Helper.getDateTime();

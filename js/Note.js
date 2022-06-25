@@ -183,7 +183,7 @@ export class Note{
 
             section_note.innerHTML=section_note_data;
             section_pinned.innerHTML=section_pinned_data;
-
+            
             Helper.LineCount();
             Helper.NoteBox_ClickEvent();
             

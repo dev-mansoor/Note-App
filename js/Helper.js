@@ -1,63 +1,29 @@
 import {Note} from "./Note.js";
 export class Helper{
 
-    
+    static CToParent(parent,c_name)
+    {
+        parent.classList.add(c_name);
+    }
     static LineCount()
     {
-        var section_note_body = document.querySelectorAll(".section-note .note-box .note-body p");
-    
+        var section_note_body = document.querySelectorAll(".note-box .note-body p");
+        
         section_note_body.forEach(text =>
             {
-                var parent = text.parentElement.parentElement;
-                var line = parseInt(text.offsetHeight / 23);
-                
-                
-                if(line==1 || line==0)
-                {
-                    parent.classList.add("one");
-                    
-                }
-                else if(line==2)
-                {
-                    parent.classList.add("two");
-                    
-                }
-                else if(line==3)
-                {
-                    parent.classList.add("three");
-                    
-                }
-                
-                else if(line==4)
-                {
-                    parent.classList.add("four");
-                    
-                }
-                else if(line==5)
-                {
-                    parent.classList.add("five");
-                    
-                }
-                else if(line==6)
-                {
-                    parent.classList.add("six");
-                    
-                }
-                else if(line==7)
-                {
-                    parent.classList.add("seven");
-                    
-                }
-                
-                else if(line==8)
-                {
-                    parent.classList.add("eight");
-                    
-                }
-                else
-                {
-                    parent.classList.add("nine");
-                }
+                var p = text.parentElement.parentElement;
+                var l = parseInt(text.offsetHeight / 23);
+
+                (l==1 || l==0)
+                ?this.CToParent(p,"one")
+                :(l==2)?this.CToParent(p,"two")
+                :(l==3)?this.CToParent(p,"three")
+                :(l==4)?this.CToParent(p,"four")
+                :(l==5)?this.CToParent(p,"five")
+                :(l==6)?this.CToParent(p,"six")
+                :(l==7)?this.CToParent(p,"seven")
+                :(l==8)?this.CToParent(p,"eight")
+                :this.CToParent(p,"nine");                
             });
     }
     //* date and time sitting
@@ -137,11 +103,8 @@ export class Helper{
         var longPress = false;
         var timeout;
         let Mobile = navigator.userAgentData.mobile;
-        // ?notes DOM's
         const note_box = document.querySelectorAll(".note-box");
-     
-         
-       
+
         //? long touch event
         note_box.forEach(NoteBox=>NoteBox.addEventListener("touchstart",()=>{
             Mobile = navigator.userAgentData.mobile;
@@ -151,29 +114,17 @@ export class Helper{
                         document.querySelector('.header-container').classList.add("show");
                  }, 300);
          
-                
                      if(document.querySelectorAll(".selected").length>0)
                      {
-                        console.log("A");
-                         if(!NoteBox.classList.contains("selected"))
-                         {
-                            console.log("C");
-                             NoteBox.classList.add("selected");
-                         }
-                         else
-                         {
-                            console.log("here")
-                            NoteBox.classList.remove("selected");
-                         }
+                        (!NoteBox.classList.contains("selected"))
+                            ?NoteBox.classList.add("selected")
+                            :NoteBox.classList.remove("selected");
                      }
                      else
                      {
-                        console.log("B");
                          longPress=false;
-                     }
-         
+                     } 
                  this.countSelected();
-            
         }));
 
         
@@ -185,22 +136,20 @@ export class Helper{
         
     
         
-            //? long press event
+            //? long mouse event
             note_box.forEach(NoteBox=>NoteBox.addEventListener("mouseup",()=>{
                 
                 Mobile = navigator.userAgentData.mobile;
                 if(Mobile==false)
-                {console.log("up")
+                {
                     clearInterval(timeout);   
                 } 
-              
             }));
         
             note_box.forEach(NoteBox=>NoteBox.addEventListener("mousedown",()=>{
                  Mobile = navigator.userAgentData.mobile;
                 if(Mobile==false)
                 {
-              
                      timeout=setInterval(() => {
                         longPress=true;
                             NoteBox.classList.add("selected");
@@ -210,16 +159,9 @@ export class Helper{
              
                          if(document.querySelectorAll(".selected").length>0)
                          {
-                             if(!NoteBox.classList.contains("selected"))
-                             {
-                                console.log("mouse1")
-                                 NoteBox.classList.add("selected");
-                             }
-                             else
-                             {
-                                console.log("mouse")
-                                 NoteBox.classList.remove("selected");
-                             }
+                            (!NoteBox.classList.contains("selected"))
+                            ?NoteBox.classList.add("selected")
+                            :NoteBox.classList.remove("selected");
                          }
                          else
                          {
@@ -233,12 +175,11 @@ export class Helper{
     
         // ? click event 
         note_box.forEach(NoteBox=>NoteBox.addEventListener("click",()=>{
-            
-                if(longPress==false && document.querySelectorAll(".selected").length==0)
-                {
-                    Note.DisplaySingleNote(NoteBox);
-                    Note.DisplayAllNotes();
-                }
+            if(longPress==false && document.querySelectorAll(".selected").length==0)
+            {
+                Note.DisplaySingleNote(NoteBox);
+                Note.DisplayAllNotes();
+            }
         })
         );
     }
@@ -312,23 +253,33 @@ export class Helper{
     {   
         for(let j=0; j<arr.length; j++)
         {
-    
             for(let i=0; i<arr.length; i++)
             {
                 if(arr[i]>arr[j])
                 {
-                    console.log(arr[i] , arr[j])
                     let temp = arr[j];
                         arr[j] = arr[i];
                         arr[i] =temp;
                 }          
-            }
-              
+            }  
         }
-    
         return arr;
     }
     
+    static DeviceHeigth()
+    {
+        const main_container = document.getElementById("main_container");
+        const footer_container = document.getElementById("footer_container");
+        
+        if(main_container.scrollHeight> main_container.offsetHeight)
+        {
+            footer_container.style.position="relative";
+        }
+        else
+        {
+            footer_container.style.position="absolute";
+        }
+    }
 
     static CheckInternet()
     {

@@ -18,6 +18,7 @@
     --FONT-z-18:18px;
 
     --ICON-z-18:18px;
+    --ICON-z-19:19px;
 
     --FONT-z-add-btn:16px;
     --NOTE-header-fz-16_5:16.5px;
@@ -60,6 +61,11 @@ body{
     overflow: hidden;
 }
 
+html,body{
+	width:100%;
+	height:100%;
+}
+
 header,section
 {
     padding: 15px 10px;
@@ -79,7 +85,7 @@ header,section
 
 .fa-solid , .fa-regular
 {
-    font-size: var(--ICON-z-18);
+    font-size: var(--ICON-z-19);
     user-select: none;
     
 }
@@ -101,7 +107,7 @@ header,section
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--FIXED-bg-clr);
+    background-color: var(--crimson-clr);
   }
 
 
@@ -118,28 +124,6 @@ header,section
 {
     0%{ transform: translateY(25%);}
     100%{transform: translateY(0%);}
-}
-@keyframes slide-bit-up
-{
-    0%{ transform: translateY(0%);}
-    100%{transform: translateY(-1%);}
-}
-@keyframes slide-up
-{
-    0%{ transform: translateY(25%);}
-    100%{transform: translateY(0%);}
-}
-
-@keyframes slide-left
-{
-    0%{ right: -350px;}
-    100%{right: 12px;}
-}
-
-@keyframes slide-right
-{
-    0%{right: 12px;}
-    100%{right: -350px;}
 }
 
 /* ? header */
@@ -191,8 +175,8 @@ header,section
     width: 100px;
     min-width: max-content;
     margin-right: 11px;
-
-    font-size: 18px;
+    font-size: var(--FONT-z-18);
+    font-weight: 500;
 }
 
 
@@ -224,7 +208,7 @@ header,section
     position: absolute;
     right: 12px;
     top: 8.5px;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 
@@ -260,7 +244,7 @@ header,section
 }
 .header-container .header-selected_to_delete .header-icon
 {
-    font-size: 17px;
+    font-size: var(--ICON-z-19);
     padding: 10px;
     border-radius:50px;
     user-select: none;
@@ -274,6 +258,28 @@ header,section
 {
     background-color:var(--border-dark);
 }
+
+/*? footer  */
+.footer
+{
+    position: absolute;
+    bottom: 0;
+    margin-top: 50px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    border-top: 1px solid #f3f3f3;
+    font-family: var(--FONT-f-Segoe);
+    color: var(--DARK-clr);
+}
+
+.footer .developer .dev-name
+{
+    font-size: 11px;
+    color: var(--crimson-clr);
+    font-weight:lighter;
+}
 /* ? main */
 .main
 {
@@ -283,11 +289,12 @@ header,section
     
     width: 100%;
     height: calc(100vh - 65px);
+    /* min-height:100%; */
+    overflow-y: auto;
     background-color:var(--bg-clr);
     font-family:var(--FONT-f-Segoe);
     font-size: var(--FONT-z);
     font-weight:400;
-    overflow-x:auto;
 
 }
 
@@ -352,17 +359,10 @@ header,section
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
     grid-gap: 0.5rem;
-    width: 100%; 
-}
+    grid-auto-rows: 16px;
 
-.section-pinned .note-box .note-body p
-{
-    line-height: 23px;
-    font-size:var(--NOTE-body-fz);
-    overflow: hidden;
-    max-height:150px;
-    height: auto;
-    white-space:pre-wrap;
+    grid-auto-flow: dense;
+    width: 100%;
 }
 
 
@@ -402,41 +402,50 @@ header,section
 }
 
 
-.section-note .note-box.one
+.section-note .note-box.one,
+.section-pinned .note-box.one
 {
     grid-row: span 5;
 }
 
-.section-note .note-box.two
+.section-note .note-box.two,
+.section-pinned .note-box.two
 {
     grid-row: span 6;
 }
 
-.section-note .note-box.three
+.section-note .note-box.three,
+.section-pinned .note-box.three
 {
     grid-row: span 7;
 }
-.section-note .note-box.four
+.section-note .note-box.four,
+.section-pinned .note-box.four
 {
     grid-row: span 8;
 }
-.section-note .note-box.five
+.section-note .note-box.five,
+.section-pinned .note-box.five
 {
     grid-row: span 9;
 }
-.section-note .note-box.six
+.section-note .note-box.six,
+.section-pinned .note-box.six
 {
     grid-row: span 10;
 }
-.section-note .note-box.seven
+.section-note .note-box.seven,
+.section-pinned .note-box.seven
 {
     grid-row: span 11;
 }
-.section-note .note-box.eight
+.section-note .note-box.eight,
+.section-pinned .note-box.eight
 {
     grid-row: span 12;
 }
-.section-note .note-box.nine
+.section-note .note-box.nine,
+.section-pinned .note-box.nine
 {
     grid-row: span 13;
 }
@@ -537,13 +546,15 @@ header,section
 .add-container
 {
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     right: 20px;
     width: 50px;
     height: 50px;
     border-radius:50%;
     overflow: hidden;
     background-color: var(--FIXED-bg-clr);
+
+    z-index: var(--Z-index-100);
 }
 
 .add-container .add-btn
@@ -635,7 +646,8 @@ dialog.dialog-insert-container[open]
 
 .dialog-insert-header > * :is(#note_heading)
 {
-    margin-top: 2px;
+    margin-top: 1.5px;
+    font-size:var(--FONT-z-17);
     color:var(--crimson-clr);
     font-weight: 500;
 }
@@ -645,7 +657,7 @@ dialog.dialog-insert-container[open]
 
     padding: 10px;
     border-radius:50px;
-    font-size: 18px;
+    font-size: var(--ICON-z-19);
     user-select: none;
   
     
@@ -780,7 +792,7 @@ dialog.dialog-delete-container[open]
 {
     position: fixed;
     top: 15px;
-  
+    right: -350px;
     min-width: 320px;
     height: fit-content;
     background-color: white;
@@ -789,15 +801,19 @@ dialog.dialog-delete-container[open]
     
     font-family: var(--FONT-f-arial);
     z-index: 10000;
-
-    animation: slide-right 500ms forwards;
-            
+    opacity:0;
+    transition: opacity 0.30s,
+    right 0.50s ease-in-out;
+    /* -webkit-transition: right 0.30s ease-in-out; */
+    /* animation: fade-out 500ms forwards,
+    slide-right 500ms forwards;          */
 }
 
 
 .toast-container.show
 {
-    animation: slide-left 500ms forwards;
+    opacity: 1;
+    right: 12px;
 }
 
  .toast-container .toast-back
